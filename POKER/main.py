@@ -84,7 +84,14 @@ def main(p, co, cr):
         elif int(choix) == 3:
             confirm = input('Etes-vous sûr de vouloir arrêter la partie ? ("oui" ou "non")\n')
             if confirm == "oui":
-                print(f"Fin de la partie, le gagnant est : {co.gagnant}")
+                tapis_joueurs = []
+                for i in range(len(p.joueurs_participants)):
+                    tapis_joueurs.append(p.joueurs_participants[i].tapis)
+                tapis_max = max(tapis_joueurs)
+                for i in range(len(tapis_joueurs)):
+                    if tapis_max == p.joueurs_participants[i].tapis:
+                        winner = p.joueurs_participants[i]
+                print(f"\nLa partie s'est terminée en {co.nb} coup{'s.' if co.nb > 1 else '.'}\nLe gagnant de la partie est {winner.nom} avec {winner.tapis} jetons.")
                 exit()
             elif confirm == "non":
                 main(p, co, cr)
